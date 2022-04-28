@@ -1,0 +1,27 @@
+.avatar{
+        
+}
+.avatar-container{
+    background-color: #fff;
+    padding: 2px;
+    border-radius: 50%;
+    border: 2px solid #ff9f0a;
+    margin:  0 36px; 
+}
+.avatar-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.avatar-name{
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 10px;
+    color: #ff9f0a;
+}
+.avatar-description{
+    text-align: center;
+    padding-bottom: 8px;
+    color: #777;
+}

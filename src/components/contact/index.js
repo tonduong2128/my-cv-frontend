@@ -1,0 +1,40 @@
+import React, { useEffect, useState } from 'react';
+import "./contact.css";
+import { faUser, faTablet, faCalendar, faEnvelope, faHome, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import ContactDetail from '../contactDetail';
+import Api from '../../axios/Api.mjs';
+
+function Contact(props) {
+    const [contact, setContact] = useState([]);
+    useEffect(() => {
+        Api.getContact(1)
+            .then((result) => {
+                const data  = result.data[0];
+                setContact(() => JSON.parse(data.content));
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }, [contact])
+    return (
+        <div className='contact'>
+            <div className='contact-title'>Contact information</div>
+            <div className='contact-details'>
+                {
+                    contact.map((con, index) => {
+                        return (
+                            <ContactDetail content={con} type={faCalendar} key={index} />
+                        )
+                    })
+                }
+                {/* <ContactDetail content="Nam" type={faUser} />
+                <ContactDetail content="(024) 6680 5588" type={faTablet} />
+                <ContactDetail content="hotro@topcv.vn" type={faEnvelope} />
+                <ContactDetail content="1 Cau Giay, Ha Noi" type={faHome} />
+                <ContactDetail content="https://fb.com/topcv.vn" type={faGlobe} /> */}
+            </div>
+        </div>
+    );
+}
+
+export default Contact;

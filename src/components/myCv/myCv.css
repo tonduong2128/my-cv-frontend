@@ -1,0 +1,27 @@
+.my-cv{
+    width: 830px;
+    /* height: 842px; */
+    display: flex;
+    box-shadow: 0px 0px 10px #ccc;
+}
+.content-left{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fffaf2;
+    padding: 10px 22px;
+}
+.content-right{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 22px;
+}
+.container-avatar{
+    padding: 10px 16px;
+}
+.container-contact{
+    padding: 10px;
+}
