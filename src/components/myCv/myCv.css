@@ -58,7 +58,10 @@
     .content-right {
         width: 50%;
     }
-
+    .my-cv {
+        width: 100%;
+        /* height: 842px; */
+    }
     .content-left {
         width: 50%;
     }
