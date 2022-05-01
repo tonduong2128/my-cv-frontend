@@ -1,40 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import "./avatar.css"
-import src from '../../imgs/avatar.jpg'
-import Api from '../../axios/Api.mjs';
-
+// import src from '../../imgs/avatar.jpg'
+import TypeAnimation from 'react-type-animation'
+import { useSelector, useDispatch } from 'react-redux'
+import { getInfoById } from '../../slice/apiInfoSlice';
 
 function Avatar(props) {
-    const [name, setName] = useState("");
-    const [url, setUrl] = useState("");
-    const [description, setDecription] = useState("");
-
+    const info = useSelector(state =>state.api?.info?.info ||  state?.api );
+    const dispatch = useDispatch();
     useEffect(() => {
-        Api.getInfo(1)
-            .then(result => {
-                const data = result.data[0];
-                setName(() => data.name);
-                setUrl(() => data.img);
-                setDecription(() => data.description);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }, [name, url])
+        dispatch(getInfoById(process.env.REACT_APP_USER_ID));
+    }, [dispatch])
     return (
         <div className='avatar'>
             <div className='avatar-name'>
-                {name}
-            </div>
-            <div className='avatar-description'>
-                {description}
+                {info.name}
             </div>
             <div className='avatar-container'>
-                <img className='avatar-img' src={url} alt='My avatar' />
+                <img className='avatar-img' src={info.img} alt='My avatar' />
             </div>
-
+            <div className='avatar-description'>
+                <TypeAnimation
+                    cursor={true}
+                    sequence={[
+                        info.description,
+                        3500,
+                        info.title,
+                        3000,
+                    ]}
+                    wrapper="div"
+                    repeat={Infinity}
+                />
+            </div>
         </div>
     );
 }
-
 export default Avatar;

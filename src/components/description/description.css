@@ -3,14 +3,19 @@
     color: #ff9f0a;
     font-weight: 600;
     padding-bottom: 10px 0;
+    width: 100%;
+    max-width: 100%;
 }
 .sub-title{
     padding-bottom: 8px;
     font-weight: 500;
 }
 .content-item{
+    
     padding:4px 0;
     font-size: 14px;
     text-align: justify;
     line-height: 20px;
+    width: 100%;
+    max-width: 100%;
 }

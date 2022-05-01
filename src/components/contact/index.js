@@ -2,20 +2,15 @@ import React, { useEffect, useState } from 'react';
 import "./contact.css";
 import { faUser, faTablet, faCalendar, faEnvelope, faHome, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import ContactDetail from '../contactDetail';
-import Api from '../../axios/Api.mjs';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContactById } from '../../slice/apiContactSlice';
 
 function Contact(props) {
-    const [contact, setContact] = useState([]);
+    const contact = useSelector(state => state.api.contact.contact);
+    const dispatch = useDispatch();
     useEffect(() => {
-        Api.getContact(1)
-            .then((result) => {
-                const data  = result.data[0];
-                setContact(() => JSON.parse(data.content));
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    }, [contact])
+        dispatch(getContactById(process.env.REACT_APP_USER_ID));
+    }, [dispatch])
     return (
         <div className='contact'>
             <div className='contact-title'>Contact information</div>

@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { counterSlice } from '../cvSlice/cvSlice'
+import rootReducer from './rootReducer'
 
 export default configureStore({
   reducer: {
-    counter: counterSlice
-  }
+    api: rootReducer,
+  },
+    // middleware: getDefaultMiddleware =>
+    // getDefaultMiddleware().concat()
 })

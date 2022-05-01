@@ -1,16 +1,20 @@
 import axios from "axios"
 const Api = {
     async getInfo(id) {
-        var data = await axios.get(`http://localhost:3000/infomation?id=${ id }`);
+        console.log(`${process.env.REACT_APP_DOMAIN_BACKEND}/infomation?id=${ id }`);
+        var data = await axios.get(`${process.env.REACT_APP_DOMAIN_BACKEND}/infomation?id=${ id }`);
         return data;
     },
     async getDescription(id) {
-        var data = await axios.get(`http://localhost:3000/description?id=${ id }`);
+        console.log(`${process.env.REACT_APP_DOMAIN_BACKEND}/description?id=${ id }`);
+        var data = await axios.get(`${process.env.REACT_APP_DOMAIN_BACKEND}/description?id=${ id }`);
         return data;
     },
     async getContact(id) {
-        var data = await axios.get(`http://localhost:3000/contact?id=${ id }`);
+        console.log(`${process.env.REACT_APP_DOMAIN_BACKEND}/contact?id=${ id }`);
+        var data = await axios.get(`${process.env.REACT_APP_DOMAIN_BACKEND}/contact?id=${ id }`);
         return data;
     }
 }
+
 export default Api;
