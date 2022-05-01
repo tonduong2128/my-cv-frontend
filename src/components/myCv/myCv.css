@@ -1,11 +1,12 @@
-.my-cv{
+.my-cv {
     width: 830px;
     /* height: 842px; */
     display: flex;
     box-shadow: 0px 0px 10px #ccc;
     position: relative;
 }
-.content-left{
+
+.content-left {
     width: 40%;
     height: 100%;
     display: flex;
@@ -13,35 +14,52 @@
     background-color: #fffaf2;
     padding: 10px 22px;
 }
-.content-right{
+
+.content-right {
     width: 60%;
     height: 100%;
     display: flex;
     flex-direction: column;
     padding: 10px 22px;
 }
-.container-avatar{
+
+.container-avatar {
     padding: 10px 16px;
 }
-.container-contact{
+
+.container-contact {
     padding: 10px;
 }
-.list-icon{
+
+.list-icon {
     position: absolute;
     top: 4px;
     right: 20px;
     list-style: none;
     display: flex;
 }
-.list-icon .icon{
+
+.list-icon .icon {
     cursor: pointer;
     padding: 4px;
     font-size: 20px;
     color: rgb(100, 100, 100);
 }
-.list-icon .icon:hover{
+
+.list-icon .icon:hover {
     color: #ccc;
 }
-.icon-check{
+
+.icon-check {
     color: #ccc !important;
+}
+
+@media screen and (max-width: 750px) {
+    .content-right {
+        width: 50%;
+    }
+
+    .content-left {
+        width: 50%;
+    }
 }
