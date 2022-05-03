@@ -13,10 +13,12 @@ import { getDescriptionById } from '../../slice/apiDescriptionSlice';
 function MyCv(props) {
     const description = useSelector(state => state.api?.description?.description || []);
     const dispatch = useDispatch();
+
     const [descriptionsRight, setDescriptionsRight] = useState([]);
     const [descriptionsLeft, setDescriptionsLeft] = useState([]);
-    const pdf = useRef();
     const [isActive, setIsActive] = useState(null);
+    const pdf = useRef();
+
     useEffect(() => {
         dispatch(getDescriptionById(process.env.REACT_APP_USER_ID));
     }, [dispatch])
@@ -24,15 +26,15 @@ function MyCv(props) {
         setDescriptionsRight(() => description?.slice(0, 3) || []);
         setDescriptionsLeft(() => description?.slice(3) || []);
     }, [description])
+    useEffect(() => {
+        isActive?.classList?.toggle("icon-check");
+    }, [isActive])
+
     const handleClickExportpdf = (e) => {
         const tag = pdf.current;
         isActive?.classList?.remove("icon-check");
         setIsActive(() => tag);
     }
-    useEffect(() => {
-        isActive?.classList?.toggle("icon-check");
-        console.log(isActive);
-    }, [isActive])
     return (
         <div className='my-cv'>
             <ul className='list-icon'>
@@ -53,7 +55,11 @@ function MyCv(props) {
                             <React.Fragment key={index}>
                                 <SeparationLine />
                                 <div className='container-contact'>
-                                    <Description title={descriptionRight.title} descriptions={descriptionRight.description} isBold />
+                                    <Description
+                                        title={descriptionRight.title}
+                                        descriptions={descriptionRight.description} 
+                                        isBold
+                                    />
                                 </div>
                             </React.Fragment>
                         )

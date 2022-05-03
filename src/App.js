@@ -1,11 +1,14 @@
+import React, { Suspense } from 'react';
 import './App.css';
-import MyCv from './components/myCv';
-
+import Loading from './components/loading';
+const MyCv = React.lazy(() => import('./components/myCv'));
 function App() {
   return (
-    <div className="app">
+    <Suspense fallback={<Loading />}>
+      <div className="app">
         <MyCv/>
-    </div>
+      </div>
+    </Suspense>
   );
 }
 
