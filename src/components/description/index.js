@@ -1,17 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import './description.css';
 
+function parseDataSkill(str) {
+    class Skill {
+        constructor() {
+            this.title = "";
+            this.description = [];
+        }
+        setTitle(title) {
+            this.title = title;
+        }
+        addDescription(item) {
+            this.description.push(item);
+        }
+    }
+    const result = [];
+    var skill = new Skill();
+    const arr = str.split("\n");
+    arr.forEach((item, index, _this) => {
+        item = item.trim();
+        if (item[0] === "-") {
+            skill.addDescription(item);
+            if (index + 1 === _this.length) {
+                result.push({ ...skill });
+            }
+        } else {
+            if (index === 0) {
+                skill.setTitle(item);
+            } else if (index !== 0) {
+                result.push({ ...skill });
+                skill = new Skill();
+                skill.setTitle(item);
+            }
+            if (index + 1 === _this.length) {
+                result.push({ ...skill });
+            }
+        }
+    })
+    return result;
+}
 function Description(props) {
     const [title, setTitle] = useState(props?.title)
     const [descriptions, setDescriptions] = useState(props?.descriptions)
-    const [dess, setDess] = useState([]);
     const [desText, setdesText] = useState("");
     const [isEditDes, setIsEditDes] = useState(false);
     const [isEditTit, setIsEditTit] = useState(false);
 
-    useEffect(() => {
-        setDess(() => descriptions);
-    }, [])
     const handleDoubleClickTitle = (e) => {
         setIsEditTit(() => !isEditTit);
     }
@@ -25,11 +59,11 @@ function Description(props) {
         }
     }
     const handleDescriptionOnchage = (e) => {
-        const des = e.target.value;
-        console.log(des);
+        setdesText(() => e.target.value);
+        setDescriptions(() => parseDataSkill(e.target.value));
     }
     useEffect(() => {
-        const text = dess.reduce((pre, des) => {
+        var text = descriptions.reduce((pre, des) => {
             const { title, description } = des;
             pre += title + '\n';
             pre += description.reduce((_pre, _des) => {
@@ -38,8 +72,9 @@ function Description(props) {
             }, "")
             return pre;
         }, "")
+        text = text.slice(0, -1);
         setdesText(() => text);
-    }, [dess])
+    }, [])
     return (
         <div className='description'>
             <div
@@ -70,7 +105,7 @@ function Description(props) {
                             onChange={handleDescriptionOnchage}
                             onKeyDown={handleKeDown}
                         /> :
-                        dess.map((des, index) => {
+                        descriptions.map((des, index) => {
                             const { title, description } = des;
                             return (
                                 <React.Fragment key={index}>
