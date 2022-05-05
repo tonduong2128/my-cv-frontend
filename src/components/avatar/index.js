@@ -7,7 +7,7 @@ import { getInfoById } from '../../slice/apiInfoSlice';
 
 function Avatar(props) {
     const info = useSelector(state => state.api?.info?.info || state?.api);
-    const [name, setName] = useState("");
+    const [name, setName] = useState("~");
     const [dess, setDess] = useState([]);
     const [isEditName, setIsEditName] = useState(false);
     const [isEditDes, setIsEditDes] = useState(false);
@@ -79,6 +79,7 @@ function Avatar(props) {
             </div>
             <div
                 className='avatar-description'
+
                 onDoubleClick={handleDoubleClickDes}
             >
                 {
