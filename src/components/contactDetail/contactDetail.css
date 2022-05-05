@@ -1,14 +1,14 @@
-.contact-detail{
+.contact-detail {
     display: flex;
     font-size: 14;
-    padding-bottom:6px;
+    padding-bottom: 6px;
 }
-.contact-detail-icon{
+.contact-detail-icon {
     color: #ff9f0a;
     padding-right: 10px;
 }
-.contact-detail-content{
-    overflow:hidden;
+.contact-detail-content {
+    overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
 }
