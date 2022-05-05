@@ -5,7 +5,9 @@ const getInfoById = createAsyncThunk(
   'api/getInfoById',
   async (userId, thunkAPI) => {
     const response = await Api.getInfo(userId);
-    return response.data[0]
+    var data = response.data[0];
+    data.description = data?.description ? JSON.parse(data.description):[];
+    return data;
   }
 )
 
@@ -25,6 +27,6 @@ export const apiInfoSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { } = apiInfoSlice.actions;
+// export const { } = apiInfoSlice.actions;
 export { getInfoById };
 export default apiInfoSlice.reducer
