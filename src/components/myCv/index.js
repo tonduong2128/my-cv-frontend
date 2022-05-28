@@ -25,8 +25,8 @@ function MyCv({ isLoaded }) {
     }, [dispatch]);
 
     useEffect(() => {
-        setDescriptionsRight(description?.slice(0, 3) || []);
-        setDescriptionsLeft(description?.slice(3) || []);
+        setDescriptionsRight(description?.slice(0, 2) || []);
+        setDescriptionsLeft(description?.slice(2) || []);
     }, [description]);
     useEffect(() => {
         isActive?.classList?.toggle('icon-check');
