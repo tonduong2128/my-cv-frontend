@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const a = [
+                {
+                    title: 'Kỹ năng chuyên môn ',
+                    description: [
+                        '- HTML5, CSS, Javascript, Java, Nodejs, PHP',
+                        '- React, Express,...',
+                        '- Restful API, MySQL, SQL, MongoDB, Github, Ubuntu...',
+                    ],
+                },
+                { title: 'Kỹ năng miềm', description: ['-Làm việc nhóm, Kỹ năng thuyết trình, Quản lý thời gian'] },
+            ];
+
+            console.log(JSON.stringify(a));
+            // [,{"title":"Kỹ năng miềm","description":["-Làm việc nhóm, Kỹ năng thuyết trình, Quản lý thời gian"]}]"
+        </script>
+    </body>
+</html>
