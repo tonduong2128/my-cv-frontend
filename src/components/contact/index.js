@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getContactById } from '../../slice/apiContactSlice';
 
 function Contact(props) {
-    const contact = useSelector((state) => state.api.contact.contact);
+    const contact = useSelector((state) => state?.api?.contact?.contact);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getContactById(process.env.REACT_APP_USER_ID));

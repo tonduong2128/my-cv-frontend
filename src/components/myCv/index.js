@@ -8,19 +8,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDescriptionById } from '../../slice/apiDescriptionSlice';
+import Loading from '../loading';
 
 function MyCv(props) {
     const description = useSelector((state) => state.api?.description?.description || []);
+
+    const isLoadedDes = useSelector((state) => state.api?.description?.isLoaded);
+    const isLoadedAva = useSelector((state) => state.api?.info?.isLoaded);
+    const isLoadedCon = useSelector((state) => state.api?.contact?.isLoaded);
+
+    const isLoaded = isLoadedAva && isLoadedDes && isLoadedCon;
+
     const dispatch = useDispatch();
+    const pdf = useRef();
 
     const [descriptionsRight, setDescriptionsRight] = useState([]);
     const [descriptionsLeft, setDescriptionsLeft] = useState([]);
     const [isActive, setIsActive] = useState(null);
-    const pdf = useRef();
 
     useEffect(() => {
         dispatch(getDescriptionById(process.env.REACT_APP_USER_ID));
     }, [dispatch]);
+
     useEffect(() => {
         setDescriptionsRight(() => description?.slice(0, 3) || []);
         setDescriptionsLeft(() => description?.slice(3) || []);
@@ -35,51 +44,56 @@ function MyCv(props) {
         setIsActive(() => tag);
     };
     return (
-        <div className="my-cv">
-            <ul className="list-icon">
-                <li ref={pdf} className="icon" onClick={handleClickExportpdf}>
-                    <FontAwesomeIcon icon={faFilePdf} />
-                </li>
-            </ul>
-            <div className="content-left">
-                <div className="container-avatar">
-                    <Avatar />
-                </div>
-                <div className="container-contact">
-                    <Contact />
-                </div>
-                {descriptionsRight.map((descriptionRight, index) => {
-                    return (
-                        <React.Fragment key={index}>
-                            <SeparationLine />
-                            <div className="container-contact">
-                                <Description
-                                    title={descriptionRight.title}
-                                    descriptions={descriptionRight.description}
-                                    isBold
-                                />
-                            </div>
-                        </React.Fragment>
-                    );
-                })}
+        <>
+            <div className={isLoaded ? 'hiden' : 'wrapper'}>
+                <Loading />
             </div>
-            <div className="content-right">
-                {descriptionsLeft.map((descriptionLeft, index) => {
-                    return (
-                        <React.Fragment key={index}>
-                            {index !== 0 && <SeparationLine />}
-                            <div className="container-contact">
-                                <Description
-                                    title={descriptionLeft.title}
-                                    descriptions={descriptionLeft.description}
-                                    isBold
-                                />
-                            </div>
-                        </React.Fragment>
-                    );
-                })}
+            <div className={isLoaded ? 'my-cv' : 'hiden'}>
+                <ul className="list-icon">
+                    <li ref={pdf} className="icon" onClick={handleClickExportpdf}>
+                        <FontAwesomeIcon icon={faFilePdf} />
+                    </li>
+                </ul>
+                <div className="content-left">
+                    <div className="container-avatar">
+                        <Avatar />
+                    </div>
+                    <div className="container-contact">
+                        <Contact />
+                    </div>
+                    {descriptionsRight.map((descriptionRight, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                <SeparationLine />
+                                <div className="container-contact">
+                                    <Description
+                                        title={descriptionRight.title}
+                                        descriptions={descriptionRight.description}
+                                        isBold
+                                    />
+                                </div>
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
+                <div className="content-right">
+                    {descriptionsLeft.map((descriptionLeft, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                {index !== 0 && <SeparationLine />}
+                                <div className="container-contact">
+                                    <Description
+                                        title={descriptionLeft.title}
+                                        descriptions={descriptionLeft.description}
+                                        isBold
+                                    />
+                                </div>
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
