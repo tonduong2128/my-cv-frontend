@@ -20,8 +20,8 @@ function Avatar(props) {
     }, [dispatch]);
 
     useEffect(() => {
-        setName(() => info.name);
-        setDess(() => info.description);
+        setName(info.name);
+        setDess(info.description);
     }, [info]);
 
     const handleDoubleClickName = (e) => {
@@ -34,8 +34,8 @@ function Avatar(props) {
 
     const handleKeyDownName = (e) => {
         if (e.key === 'Enter' || e.key === 'Escape') {
-            setIsEditName(() => false);
-            setIsEditDes(() => false);
+            setIsEditName(false);
+            setIsEditDes(false);
         }
     };
     const convertToDataDess = (data) => {
@@ -54,8 +54,7 @@ function Avatar(props) {
     };
     const handleDessOnchange = (e) => {
         const dataDes = e.target.value?.split('|');
-        console.log(dataDes);
-        setDess(() => dataDes);
+        setDess(dataDes);
     };
     return (
         <div className="avatar">
@@ -74,7 +73,7 @@ function Avatar(props) {
             <div className="avatar-container">
                 <img
                     className={isLoadImg ? 'hiden' : 'avatar-img'}
-                    onLoad={() => setIsLoadImg(() => false)}
+                    onLoad={() => setIsLoadImg(false)}
                     src={info.img}
                     alt="My avatar"
                 />

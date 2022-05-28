@@ -12,7 +12,7 @@ export const apiInfoSlice = createSlice({
     name: 'api',
     initialState: {
         info: {},
-        isLoaded: true,
+        isLoaded: false,
     },
     reducers: {},
     extraReducers: (builder) => {

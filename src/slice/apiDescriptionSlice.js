@@ -17,7 +17,7 @@ export const apiDescriptionSlice = createSlice({
     name: 'api',
     initialState: {
         description: [],
-        isLoaded: true,
+        isLoaded: false,
     },
     reducers: {},
     extraReducers: (builder) => {

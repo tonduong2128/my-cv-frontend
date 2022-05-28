@@ -10,14 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDescriptionById } from '../../slice/apiDescriptionSlice';
 import Loading from '../loading';
 
-function MyCv(props) {
+function MyCv({ isLoaded }) {
     const description = useSelector((state) => state.api?.description?.description || []);
-
-    const isLoadedDes = useSelector((state) => state.api?.description?.isLoaded);
-    const isLoadedAva = useSelector((state) => state.api?.info?.isLoaded);
-    const isLoadedCon = useSelector((state) => state.api?.contact?.isLoaded);
-
-    const isLoaded = isLoadedAva && isLoadedDes && isLoadedCon;
 
     const dispatch = useDispatch();
     const pdf = useRef();
@@ -31,8 +25,8 @@ function MyCv(props) {
     }, [dispatch]);
 
     useEffect(() => {
-        setDescriptionsRight(() => description?.slice(0, 3) || []);
-        setDescriptionsLeft(() => description?.slice(3) || []);
+        setDescriptionsRight(description?.slice(0, 3) || []);
+        setDescriptionsLeft(description?.slice(3) || []);
     }, [description]);
     useEffect(() => {
         isActive?.classList?.toggle('icon-check');
@@ -41,7 +35,7 @@ function MyCv(props) {
     const handleClickExportpdf = (e) => {
         const tag = pdf.current;
         isActive?.classList?.remove('icon-check');
-        setIsActive(() => tag);
+        setIsActive(tag);
     };
     return (
         <>
@@ -97,4 +91,4 @@ function MyCv(props) {
     );
 }
 
-export default MyCv;
+export default React.memo(MyCv);

@@ -11,7 +11,7 @@ export const apiContactSlice = createSlice({
     name: 'api',
     initialState: {
         contact: [],
-        isLoaded: true,
+        isLoaded: false,
     },
     reducers: {},
     extraReducers: (builder) => {
