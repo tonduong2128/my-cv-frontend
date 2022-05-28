@@ -46,7 +46,6 @@ function Avatar(props) {
             data = data.map((item) => {
                 return Number.isNaN(Number.parseInt(item)) ? item : Number.parseInt(item);
             });
-            console.log(data);
             return data;
         } catch (error) {
             return ['', 2000];

@@ -10,9 +10,6 @@ function App() {
 
     const isLoaded = isLoadedAva && isLoadedDes && isLoadedCon;
 
-    useEffect(() => {
-        console.log('Loaded: ' + isLoaded);
-    }, [isLoaded]);
     return (
         <Suspense fallback={<Loading />}>
             <div className="app">
